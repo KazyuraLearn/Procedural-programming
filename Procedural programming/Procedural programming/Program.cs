@@ -28,8 +28,10 @@ namespace ProceduralProgramming
 				string[] buf = reader.ReadLine().Split(new char[] { '#' });
 				if (buf[0] == "1")
 					filmsList.Add(new Films(new Games(buf[1], buf[2])));
-				else
+				else if (buf[0] == "2")
 					filmsList.Add(new Films(new Cartoon(buf[1], Convert.ToInt32(buf[2]))));
+				else
+					filmsList.Add(new Films(new Documentary(buf[1], Convert.ToInt32(buf[2]))));
 			}
 			reader.Close(); file.Close();
 		}
