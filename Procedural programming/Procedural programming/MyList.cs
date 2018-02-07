@@ -57,7 +57,14 @@ namespace ProceduralProgramming
 				current = current.next;
 			}
 			return false;
-		}		
+		}
+
+		public void Swap(Node<T> one, Node<T> two)
+		{
+			T temp = one.data;
+			one.data = two.data;
+			two.data = temp;
+		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{

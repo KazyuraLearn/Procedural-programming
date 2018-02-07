@@ -38,5 +38,12 @@ namespace ProceduralProgramming
 				return result;
 			}
 		}
+
+		public static int Compare(Films one, Films two)
+		{
+			if (one.VowelCount == two.VowelCount)
+				return 0;
+			return (one.VowelCount > two.VowelCount) ? 1 : -1;
+		}
 	}
 }
