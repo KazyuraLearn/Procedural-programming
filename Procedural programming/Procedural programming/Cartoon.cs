@@ -8,7 +8,7 @@ namespace ProceduralProgramming
 {
 	struct Cartoon
 	{
-		public string name;
+		string name;
 		enum Type { рисованный, кукольный, пластилиновый };
 		Type ob;
 
