@@ -8,7 +8,7 @@ namespace ProceduralProgramming
 {
 	struct Games
 	{
-		string name;
+		public string name;
 		string director;
 
 		public Games(string name, string director)
