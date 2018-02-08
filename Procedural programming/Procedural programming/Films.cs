@@ -28,9 +28,16 @@ namespace ProceduralProgramming
 						if (vowel.IndexOf(el) != -1)
 							result++;
 				}
-				else
+				else if (ob is Games)
 				{
 					Games temp = (Games)ob;
+					foreach (var el in temp.name)
+						if (vowel.IndexOf(el) != -1)
+							result++;
+				}
+				else
+				{
+					Documentary temp = (Documentary)ob;
 					foreach (var el in temp.name)
 						if (vowel.IndexOf(el) != -1)
 							result++;

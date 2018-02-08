@@ -8,18 +8,20 @@ namespace ProceduralProgramming
 {
 	struct Documentary
 	{
-		string name;
+		public string name;
+		string country;
 		int yearRelease;
 
-		public Documentary(string name, int yearRelease)
+		public Documentary(string name, string country, int yearRelease)
 		{
 			this.name = name;
+			this.country = country;
 			this.yearRelease = yearRelease;
 		}
 
 		public override string ToString()
 		{
-			return "Название документального фильма: " + name + ". Год выпуска: " + yearRelease;
+			return "Название документального фильма: " + name + ". Страна: " + country + ". Год выпуска: " + yearRelease;
 		}
 	}
 }
