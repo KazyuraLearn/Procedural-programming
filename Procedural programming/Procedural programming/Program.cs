@@ -13,7 +13,7 @@ namespace ProceduralProgramming
 		{
 			MyList<Films> filmsList = new MyList<Films>();
 			ReadToFile(args[0], filmsList);
-			WriteToFile(args[1], filmsList);
+			WriteToFileGames(args[1], filmsList);
 			System.Diagnostics.Process process = new System.Diagnostics.Process();
 			process.StartInfo.FileName = args[1];
 			process.Start();
@@ -42,6 +42,18 @@ namespace ProceduralProgramming
 			writer.WriteLine("----------------------------------------------------------");
 			foreach (var el in filmsList)
 				writer.WriteLine(el.ob.ToString());
+			writer.Close(); file.Close();
+		}
+
+		static void WriteToFileGames(string fileName, MyList<Films> filmsList)
+		{
+			FileStream file = new FileStream(fileName, FileMode.OpenOrCreate);
+			StreamWriter writer = new StreamWriter(file);
+			writer.WriteLine("Список фильмов содержит: " + filmsList.Count + " элементов");
+			writer.WriteLine("----------------------------------------------------------");
+			foreach (var el in filmsList)
+				if (el.ob is Games)
+					writer.WriteLine(el.ob.ToString());
 			writer.Close(); file.Close();
 		}
 	}
