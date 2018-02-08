@@ -27,9 +27,9 @@ namespace ProceduralProgramming
 			{
 				string[] buf = reader.ReadLine().Split(new char[] { '#' });
 				if (buf[0] == "1")
-					filmsList.Add(new Films(new Games(buf[1], buf[2])));
+					filmsList.Add(new Films(new Games(buf[1], buf[2], buf[3])));
 				else
-					filmsList.Add(new Films(new Cartoon(buf[1], Convert.ToInt32(buf[2]))));
+					filmsList.Add(new Films(new Cartoon(buf[1], buf[2], Convert.ToInt32(buf[3]))));
 			}
 			reader.Close(); file.Close();
 		}
