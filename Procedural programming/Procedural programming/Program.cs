@@ -48,6 +48,19 @@ namespace ProceduralProgramming
 			writer.Close(); file.Close();
 		}
 
+		static void WriteToFileGames(string fileName, MyList<Films> filmsList)
+		{
+			FileStream file = new FileStream(fileName, FileMode.OpenOrCreate);
+			StreamWriter writer = new StreamWriter(file);
+			Sort(filmsList);
+			writer.WriteLine("Список фильмов содержит: " + filmsList.Count + " элементов");
+			writer.WriteLine("----------------------------------------------------------");
+			foreach (var el in filmsList)
+				if (el.ob is Games)
+					writer.WriteLine(el.ob.ToString());
+			writer.Close(); file.Close();
+		}
+
 		static void Sort(MyList<Films> filmsList)
 		{
 			bool flag = true;
