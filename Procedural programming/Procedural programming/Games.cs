@@ -6,22 +6,18 @@ using System.Threading.Tasks;
 
 namespace ProceduralProgramming
 {
-	struct Games
+	public struct Games
 	{
-		public string name;
-		string country;
 		string director;
 
-		public Games(string name, string country, string director)
+		public Games(string director)
 		{
-			this.name = name;
-			this.country = country;
 			this.director = director;
 		}
 
 		public override string ToString()
 		{
-			return "Название игрового фильма: " + name + ". Страна: " + country + ". Режисёр: " + director;
+			return ". Режисёр: " + director;
 		}
 	}
 }

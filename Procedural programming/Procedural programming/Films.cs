@@ -6,12 +6,21 @@ using System.Threading.Tasks;
 
 namespace ProceduralProgramming
 {
-	struct Films
+	public interface IReturnType
 	{
+		Type ReturnType();
+	}
+
+	public struct Films : IComparable<Films>, IReturnType
+	{
+		string name;
+		string country;
 		public Object ob;
 
-		public Films(Object ob)
+		public Films(string name, string country, Object ob)
 		{
+			this.name = name;
+			this.country = country;
 			this.ob = ob;
 		}
 
@@ -21,36 +30,28 @@ namespace ProceduralProgramming
 			{
 				int result = 0;
 				string vowel = "AЕЁИОУЫЭЮЯаеёиоуыэюяAEIOUYaeiouy";
-				if (ob is Cartoon)
-				{
-					Cartoon temp = (Cartoon)ob;
-					foreach (var el in temp.name)
-						if (vowel.IndexOf(el) != -1)
-							result++;
-				}
-				else if (ob is Games)
-				{
-					Games temp = (Games)ob;
-					foreach (var el in temp.name)
-						if (vowel.IndexOf(el) != -1)
-							result++;
-				}
-				else
-				{
-					Documentary temp = (Documentary)ob;
-					foreach (var el in temp.name)
-						if (vowel.IndexOf(el) != -1)
-							result++;
-				}
+				foreach (var el in name)
+					if (vowel.IndexOf(el) != -1)
+						result++;
 				return result;
 			}
 		}
 
-		public static int Compare(Films one, Films two)
+		public int CompareTo(Films ob)
 		{
-			if (one.VowelCount == two.VowelCount)
+			if (this.VowelCount == ob.VowelCount)
 				return 0;
-			return (one.VowelCount > two.VowelCount) ? 1 : -1;
+			return (this.VowelCount > ob.VowelCount) ? 1 : -1;
+		}
+
+		public override string ToString()
+		{
+			return "Название фильма: " + name + ". Страна: " + country + ". Жанр: " + ob.GetType().Name + ob.ToString();
+		}
+
+		public Type ReturnType()
+		{
+			return ob.GetType();
 		}
 	}
 }
