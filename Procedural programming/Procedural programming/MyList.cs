@@ -8,7 +8,7 @@ using System.IO;
 
 namespace ProceduralProgramming
 {
-	public class MyList<T> : IEnumerable<T> where T : IComparable<T>, IReturnType
+	public class MyList<T> : IEnumerable<T> where T : IComparable<T>, IReturnTypeObj
 	{
 		Node<T> head;
 		Node<T> tail;
@@ -105,14 +105,16 @@ namespace ProceduralProgramming
 			return filmsList;
 		}
 
-		public void WriteToFile<type>(string fileName)
+		public void WriteToFile<type>(string fileName, bool baseStruct)
 		{
 			FileStream file = new FileStream(fileName, FileMode.Create);
 			StreamWriter writer = new StreamWriter(file);
 			Node<T> current = head;
 			while (current != null)
 			{
-				if (current.data.ReturnType().Equals(typeof(type)))
+				if (current.data.ObjType().Equals(typeof(type)) && !baseStruct)
+					writer.WriteLine(current.data.ToString());
+				if (current.data.GetType().Equals(typeof(type)) && baseStruct)
 					writer.WriteLine(current.data.ToString());
 				current = current.next;
 			}

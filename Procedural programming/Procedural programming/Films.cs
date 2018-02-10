@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProceduralProgramming
 {
-	public interface IReturnType
+	public interface IReturnTypeObj
 	{
-		Type ReturnType();
+		Type ObjType();
 	}
 
-	public struct Films : IComparable<Films>, IReturnType
+	public struct Films : IComparable<Films>, IReturnTypeObj
 	{
 		string name;
 		string country;
@@ -49,7 +49,7 @@ namespace ProceduralProgramming
 			return "Название фильма: " + name + ". Страна: " + country + ". Жанр: " + ob.GetType().Name + ob.ToString();
 		}
 
-		public Type ReturnType()
+		public Type ObjType()
 		{
 			return ob.GetType();
 		}
