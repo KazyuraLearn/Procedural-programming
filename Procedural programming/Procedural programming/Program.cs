@@ -13,7 +13,7 @@ namespace ProceduralProgramming
 		{
 			MyList<Films> filmsList = new MyList<Films>();
 			ReadToFile(args[0], filmsList);
-			WriteToFile(args[1], filmsList);
+			Multimethod.MultiWriteToFile(args[1], filmsList);
 			System.Diagnostics.Process process = new System.Diagnostics.Process();
 			process.StartInfo.FileName = args[1];
 			process.Start();
