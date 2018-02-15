@@ -12,7 +12,7 @@ namespace ProceduralProgramming
 		static void Main(string[] args)
 		{
 			MyList<Films> filmsList = new MyList<Films>();
-			filmsList = filmsList.ReadToFile(args[0]);
+			Console.WriteLine(filmsList.ReadToFile(args[0], filmsList));
 			filmsList.WriteToFile<Games>(args[1], false);
 
 			if (File.Exists(args[1]))
@@ -21,6 +21,7 @@ namespace ProceduralProgramming
 				process.StartInfo.FileName = args[1];
 				process.Start();
 			}
+			Console.ReadKey();
 		}
 	}
 }

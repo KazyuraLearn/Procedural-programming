@@ -88,11 +88,12 @@ namespace ProceduralProgramming
 			}
 		}
 
-		public MyList<Films> ReadToFile(string fileName)
+		public string ReadToFile(string fileName, MyList<Films> filmsList)
 		{
-			MyList<Films> filmsList = new MyList<Films>();
+			if (fileName == "" || fileName == null)
+				return "Файл не задан";
 			if (!File.Exists(fileName))
-				return filmsList;
+				return "Файл не найден";
 			try
 			{
 				using (StreamReader reader = new StreamReader(fileName, Encoding.GetEncoding(1251)))
@@ -110,11 +111,19 @@ namespace ProceduralProgramming
 							filmsList.Add(new Films(buf[1], buf[2], new Documentary(Convert.ToInt32(buf[3]))));
 					}
 				}
-				return filmsList;
+				return null;
 			}
-			catch
+			catch (FormatException)
 			{
-				return new MyList<Films>();
+				return "Входные данные некорректны. Строка там, где ожидалось число.";
+			}
+			catch (OverflowException)
+			{
+				return "Входные данные некорректны. Число слишком большое или слишком маленькое.";
+			}
+			catch (IOException)
+			{
+				return "Не удаётся получить доступ к файлу. Вероятно он занят другим приложением.";
 			}
 		}
 
