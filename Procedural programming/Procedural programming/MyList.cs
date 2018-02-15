@@ -89,36 +89,60 @@ namespace ProceduralProgramming
 		public MyList<Films> ReadToFile(string fileName)
 		{
 			MyList<Films> filmsList = new MyList<Films>();
-			FileStream file = new FileStream(fileName, FileMode.OpenOrCreate);
-			StreamReader reader = new StreamReader(file, Encoding.GetEncoding(1251));
-			while (reader.Peek() > -1)
+			if (!File.Exists(fileName))
+				return filmsList;
+			try
 			{
-				string[] buf = reader.ReadLine().Split(new char[] { '#' });
-				if (buf[0] == "1")
-					filmsList.Add(new Films(buf[1], buf[2], new Games(buf[3])));
-				else if (buf[0] == "2")
-					filmsList.Add(new Films(buf[1], buf[2], new Cartoon(Convert.ToInt32(buf[3]))));
-				else if (buf[0] == "3")
-					filmsList.Add(new Films(buf[1], buf[2], new Documentary(Convert.ToInt32(buf[3]))));
+				using (StreamReader reader = new StreamReader(fileName, Encoding.GetEncoding(1251)))
+				{
+					while (reader.Peek() > -1)
+					{
+						string[] buf = reader.ReadLine().Split(new char[] { '#' });
+						if (buf.Length != 4)
+							continue;
+						if (buf[0] == "1")
+							filmsList.Add(new Films(buf[1], buf[2], new Games(buf[3])));
+						else if (buf[0] == "2")
+							filmsList.Add(new Films(buf[1], buf[2], new Cartoon(Convert.ToInt32(buf[3]))));
+						else if (buf[0] == "3")
+							filmsList.Add(new Films(buf[1], buf[2], new Documentary(Convert.ToInt32(buf[3]))));
+					}
+				}
+				return filmsList;
 			}
-			reader.Close(); file.Close();
-			return filmsList;
+			catch
+			{
+				return new MyList<Films>();
+			}
 		}
 
-		public void WriteToFile<type>(string fileName, bool baseStruct)
+		public int WriteToFile<type>(string fileName, bool baseStruct)
 		{
-			FileStream file = new FileStream(fileName, FileMode.Create);
-			StreamWriter writer = new StreamWriter(file);
-			Node<T> current = head;
-			while (current != null)
+			try
 			{
-				if (current.data.ObjType().Equals(typeof(type)) && !baseStruct)
-					writer.WriteLine(current.data.ToString());
-				if (current.data.GetType().Equals(typeof(type)) && baseStruct)
-					writer.WriteLine(current.data.ToString());
-				current = current.next;
+				if (File.Exists(fileName))
+					File.Delete(fileName);
+				using (FileStream file = File.Create(fileName))
+				{
+					using (StreamWriter writer = new StreamWriter(file))
+					{
+						Node<T> current = head;
+						while (current != null)
+						{
+							if (current.data.ObjType().Equals(typeof(type)) && !baseStruct)
+								writer.WriteLine(current.data.ToString());
+							if (current.data.GetType().Equals(typeof(type)) && baseStruct)
+								writer.WriteLine(current.data.ToString());
+							current = current.next;
+						}
+					}
+				}
+				return 0;
 			}
-			writer.Close(); file.Close();
+			catch
+			{
+				return -1;
+			}
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
