@@ -29,7 +29,7 @@ namespace ProceduralProgramming
 			get
 			{
 				int result = 0;
-				string vowel = "AЕЁИОУЫЭЮЯаеёиоуыэюяAEIOUYaeiouy";
+				string vowel = "АЕЁИОУЫЭЮЯаеёиоуыэюяAEIOUYaeiouy";
 				foreach (var el in name)
 					if (vowel.IndexOf(el) != -1)
 						result++;
