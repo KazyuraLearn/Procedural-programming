@@ -13,7 +13,8 @@ namespace ProceduralProgramming
 		{
 			MyList<Films> filmsList = new MyList<Films>();
 			filmsList = filmsList.ReadToFile(args[0]);
-			filmsList.WriteToFile<Games>(args[1], false);
+			//filmsList.WriteToFile<Films>(args[1], true);
+			Multimethod.MultiWriteToFile(args[1], filmsList);
 
 			if (File.Exists(args[1]))
 			{

@@ -69,6 +69,8 @@ namespace ProceduralProgramming
 
 		public void Sort()
 		{
+			if (Count == 0)
+				return;
 			bool flag = true;
 			while (flag)
 			{
